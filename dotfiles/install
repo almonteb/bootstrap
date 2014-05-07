@@ -1,0 +1,16 @@
+#!/usr/bin/env ruby
+
+# from http://errtheblog.com/posts/89-huba-huba
+
+home = File.expand_path('~')
+
+Dir['*'].each do |file|
+  next if file =~ /install|config/
+  target = File.join(home, ".#{file}")
+  if File.exists?("#{target}") 
+    `rm -rf #{target}`
+  end
+  `ln -sf #{File.expand_path file} #{target}`
+end
+
+`vim +BundleClean! +BundleInstall +qall`

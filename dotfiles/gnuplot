@@ -1,0 +1,8 @@
+set datafile separator ","
+set ytics font "Nimbus Sans L,10"
+set xtics font "Nimbus Sans L,10"
+set xlabel font "Nimbus Sans L,10"
+set ylabel font "Nimbus Sans L,10"
+set terminal wxt size 800,600 enhanced font "Nimbus Sans L,10"
+set border 3 back
+set tics nomirror

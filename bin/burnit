@@ -1,0 +1,20 @@
+#!/bin/bash
+#
+#  burnit.sh
+#    burnit <isofile>
+#
+
+[ "$1" ] || {
+    echo "usage: burnit <isofile>"
+    exit 1
+}
+
+ISOFILE=$1
+[ -f $ISOFILE ] || {
+    echo "$ISOFILE: not found"
+    exit 1
+}
+
+cdrecord -v -eject -tao $ISOFILE
+
+exit 0

@@ -1,0 +1,40 @@
+[user]
+    name = Brendan Almonte
+    email = almonteb@datawh.net
+[branch]
+    autosetuprebase = always
+[alias]
+    co = checkout
+    st = status
+    di = diff
+    co = checkout
+    ci = commit
+    br = branch
+    sta = stash
+    pu = pull
+    last = log -p -n 1
+    nb = "!sh -c 'git checkout -b \"$1\" -t ${2:-$(git rev-parse --abbrev-ref --symbolic-full-name @\\{u\\})}' -"
+    rms = "!f(){ git rm --cached \"$1\";rm -r \"$1\";git config -f .gitmodules --remove-section \"submodule.$1\";git config -f .git/config --remove-section \"submodule.$1\";git add .gitmodules; }; f"
+    lg = log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset' --abbrev-commit --date=relative
+    pullall = "!f(){ git pull \"$@\" && git submodule update --init --recursive; }; f"
+[apply]
+    whitespace = nowarn
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+[github]
+    user = almonteb
+[push]
+    default = matching
+[core]
+    excludesfile = ~/.gitignore_global
+    editor = vim
+[http]
+	sslVerify = false
+[diff]
+	tool = vimdiff
+[merge]
+	tool = vimdiff
+[pull]
+	rebase = true

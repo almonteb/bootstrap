@@ -1,0 +1,58 @@
+#!/usr/bin/env python
+
+import glob
+import hashlib
+import os
+import sys
+
+FILE_PATTERN = '*.*'
+
+def getHash(fileName):
+    with open(fileName, 'rb') as file:
+        hashVal = hashlib.md5(file.read()).hexdigest()
+        return hashVal
+    raise Exception("Unable to get hash for %s" % fileName)
+
+def getFiles(path):
+    return glob.glob("%s/%s" % (path, FILE_PATTERN))
+
+def getFileName(path):
+    return path.split(os.path.sep)[-1]
+
+def buildMap(path, forward=True):
+    hashes = {}
+    for fileName in getFiles(path):
+        if forward:
+            hashes[getFileName(fileName)] = getHash(fileName)
+        else:
+            hashes[getHash(fileName)] = getFileName(fileName)
+    return hashes
+
+def validate(sourceMap, targetMap):
+    missing = []
+    matches = {}
+    for sourceFile in sourceMap.keys():
+        hashVal = sourceMap[sourceFile]
+        if hashVal in targetMap:
+            matches[sourceFile] = targetMap[hashVal]
+        else:
+            missing.append(sourceFile)
+    return missing, matches
+
+def main(args):
+    if len(args) != 2:
+        raise Exception("Missing source and target dir")
+    source, target = args
+    sourceMap = buildMap(source)
+    targetMap = buildMap(target, forward=False)
+    missingFiles, matchedFiles = validate(sourceMap, targetMap)
+    print("Missing files")
+    for missingFile in missingFiles:
+        print(missingFile)
+    print()
+    print("Matched files")
+    for matchedFile in matchedFiles.keys():
+        print("%s = %s" % (matchedFile, matchedFiles[matchedFile]))
+
+if __name__ == '__main__':
+    main(sys.argv[1:])

@@ -1,0 +1,10 @@
+autoenv
+Django
+virtualenv
+virtualenvwrapper
+flake8
+requests
+psycopg2
+pep8
+bpython
+RBTools

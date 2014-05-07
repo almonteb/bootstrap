@@ -1,0 +1,24 @@
+autoload -Uz promptinit && promptinit
+prompt adam1
+
+. ~/.zsh/env
+. ~/.zsh/config
+. ~/.zsh/aliases
+. ~/.zsh/prompt
+. $BOOTSTRAP_DIR/lib/antigen/antigen.zsh
+
+antigen bundle zsh-users/zsh-syntax-highlighting
+antigen apply
+
+# bind special keys according to readline configuration
+if [ -f /etc/inputrc ]; then
+  eval "$(sed -n 's/^/bindkey /; s/: / /p' /etc/inputrc)">/dev/null
+fi
+
+# private aliases, if found
+if [ -f $HOME/.private_profile ]; then
+  . $HOME/.private_profile
+fi
+
+sHost=$(hostname | cut -d. -f1)
+[ -e ~/.zsh/zshrc.$sHost ] && source ~/.zsh/zshrc.$sHost

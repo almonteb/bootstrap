@@ -1,0 +1,48 @@
+export HISTCONTROL=ignoredups
+# ... and ignore same sucessive entries.
+export HISTCONTROL=ignoreboth
+export HISTSIZE=99999
+export HISTFILESIZE=999999
+export BOOTSTRAP_DIR=$(readlink -f $(dirname $(readlink -f $0))/../../)
+export DOTFILES=$BOOTSTRAP_DIR/dotfiles
+
+paths=(
+    ~/bin
+    $BOOTSTRAP_DIR/lib/powerline/scripts
+    ~/git/dev-tools/aw_utils
+    /usr/local/heroku/bin
+)
+for p in $paths; do
+    if [ -d "$p" ]; then
+        echo $PATH | tr ':' '\n' | grep -x $p >/dev/null
+        [[ $? -eq 0 ]] || export PATH=$p:$PATH
+    fi
+done
+
+export SSH_AGENT_PID=$(pidof ssh-agent | awk '{print $NF}')
+if [[ -z $SSH_AGENT_PID ]] ; then
+    eval $(ssh-agent)
+else
+    export SSH_AUTH_SOCK=$(find /tmp -path "*ssh*" -type s -iname agent.\* -uid $(id -u) -print 2>/dev/null)
+fi
+
+# autoenv
+if [ -f "/usr/bin/activate.sh" ]; then
+    source /usr/bin/activate.sh
+fi
+
+# Virtualenv
+VENV_WRAPPER=`which virtualenvwrapper.sh 2>/dev/null`
+if [ -f "$VENV_WRAPPER" ]; then
+    source $VENV_WRAPPER
+fi
+
+# RVM
+if [[ -s "$HOME/.rvm/scripts/rvm" ]]  ; then
+  source "$HOME/.rvm/scripts/rvm" ;
+fi
+
+# private aliases, if found
+if [ -f $HOME/.private_profile ]; then
+  . $HOME/.private_profile
+fi

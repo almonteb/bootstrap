@@ -1,0 +1,24 @@
+[submodule "dotfiles/config/awesome/vicious"]
+	path = dotfiles/config/awesome/vicious
+	url = http://git.sysphere.org/vicious
+[submodule "lib/powerline"]
+	path = lib/powerline
+	url = ssh://git@github.com/Lokaltog/powerline.git
+[submodule "dotfiles/config/awesome/icons"]
+	path = dotfiles/config/awesome/icons
+	url = ssh://git@github.com/intrntbrn/icons.git
+[submodule "dotfiles/vim/bundle/vundle"]
+	path = dotfiles/vim/bundle/vundle
+	url = https://github.com/gmarik/vundle.git
+[submodule "dotfiles/config/awesome/freedesktop"]
+	path = dotfiles/config/awesome/freedesktop
+	url = git@github.com:almonteb/awesome-freedesktop.git
+[submodule "lib/antigen"]
+	path = lib/antigen
+	url = git@github.com:zsh-users/antigen.git
+[submodule "dotfiles/config/awesome/blingbling"]
+	path = dotfiles/config/awesome/blingbling
+	url = https://github.com/cedlemo/blingbling
+[submodule "dotfiles/config/awesome/lain"]
+	path = dotfiles/config/awesome/lain
+	url = https://github.com/copycat-killer/lain.git
