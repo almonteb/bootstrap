@@ -1,10 +1,16 @@
-autoload -Uz promptinit && promptinit
-prompt adam1
+sHost=$(hostname | cut -d. -f1)
+
+case "$sHost" in
+    Phobos|dev-vm)
+        promptColor="green" ;;
+    *)
+        promptColor="" ;;
+esac
 
 . ~/.zsh/env
 . ~/.zsh/config
 . ~/.zsh/aliases
-. ~/.zsh/prompt
+. ~/.zsh/prompt $promptColor
 . $BOOTSTRAP_DIR/lib/antigen/antigen.zsh
 
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -20,5 +26,4 @@ if [ -f $HOME/.private_profile ]; then
   . $HOME/.private_profile
 fi
 
-sHost=$(hostname | cut -d. -f1)
 [ -e ~/.zsh/zshrc.$sHost ] && source ~/.zsh/zshrc.$sHost

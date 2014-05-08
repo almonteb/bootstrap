@@ -1,8 +1,6 @@
-autoload -U colors
-colors
-setopt prompt_subst
-PROMPT='
-%{$fg_bold[red]%}[%{$fg_bold[cyan]%}%m%{$fg_bold[red]%}] %{$reset_color%}%{$fg_bold[green]%}%(!.%SROOT%s.%n)%{$reset_color%}:%~ %{$fg_bold[black]%}$(vcprompt)%# %{$reset_color%}'
+autoload -U colors && colors
+autoload compinit && compinit
+autoload -Uz promptinit && promptinit
 
 bindkey '^[^[[D' backward-word
 bindkey '^[^[[C' forward-word
@@ -17,6 +15,7 @@ bindkey '^[^[[C' forward-word
 setopt CORRECT
 setopt CORRECTALL
 
+setopt prompt_subst
 setopt hist_ignore_dups     # ignore duplication command history list
 setopt share_history        # share command history data
 setopt HIST_IGNORE_SPACE
@@ -40,10 +39,6 @@ HISTSIZE=10000
 
 REPORTTIME=10 # Show elapsed time if command took more than X seconds
 LISTMAX=0 # ask to complete if top of list would scroll off screen
-
-# Load completions for Ruby, Git, etc.
-autoload compinit
-compinit
 
 # Make CTRL-W delete after other chars, not just spaces
 WORDCHARS=${WORDCHARS//[&=\/;\!#%\{]}
