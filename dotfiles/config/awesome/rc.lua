@@ -12,21 +12,21 @@ awful.rules = require("awful.rules")
 awful.autofocus = require("awful.autofocus")
 
 -- {{{ systray
-function spawn_once_name(name, command)
+function spawn_once(name, command)
+    if (command == nil) then
+        command = name
+    end
     os.execute("pgrep " .. name .. " || " .. command .. " &")
-end
-
-function spawn_once(name)
-    spawn_once_name(name, name)
 end
 
 spawn_once("nm-applet")
 spawn_once("xfce4-power-manager")
-spawn_once_name("compton", "compton --config ~/.compton.conf -b")
-spawn_once_name("wmname", "wmname LG3D")
-spawn_once_name("numlockx", "numlockx on")
-spawn_once_name("dropbox", "dropbox start")
-spawn_once_name("xscreensaver", "xscreensaver -nosplash")
+spawn_once("unclutter")
+spawn_once("compton", "compton --config ~/.compton.conf -b")
+spawn_once("wmname", "wmname LG3D")
+spawn_once("numlockx", "numlockx on")
+spawn_once("dropbox", "dropbox start")
+spawn_once("xscreensaver", "xscreensaver -nosplash")
 -- }}}
 
 -- {{{ Error handling
