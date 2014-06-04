@@ -5,13 +5,17 @@ export HISTSIZE=99999
 export HISTFILESIZE=999999
 export BOOTSTRAP_DIR=$(readlink -f $(dirname $(readlink -f $0))/../../)
 export DOTFILES=$BOOTSTRAP_DIR/dotfiles
+export ANDROID_HOME=/opt/android-sdk-linux
 
 paths=(
     ~/bin
     $BOOTSTRAP_DIR/lib/powerline/scripts
     ~/git/dev-tools/aw_utils
     /usr/local/heroku/bin
+    $ANDROID_HOME/tools
+    $ANDROID_HOME/platform-tools
 )
+
 for p in $paths; do
     if [ -d "$p" ]; then
         echo $PATH | tr ':' '\n' | grep -x $p >/dev/null
