@@ -160,7 +160,7 @@ mytextclock = awful.widget.textclock("<span background='" .. beautiful.colors.ba
         beautiful.colors.base03 .. "' font='Tamsyn 15'> <span font='Termsyn 8'>ƕ %I:%M %p </span></span>")
 lain.widgets.calendar:attach(mytextclock, { font = "Droid Sans Mono" })
 
-local yawn = lain.widgets.yawn(2513983, { u = "f" })
+local yawn = lain.widgets.yawn(2490383, { u = "f" })
 
 -- {{{ CPU
 cpuwidget = wibox.widget.textbox()

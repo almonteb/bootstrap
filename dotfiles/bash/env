@@ -10,10 +10,10 @@ export ANDROID_HOME=/opt/android-sdk-linux
 paths=(
     ~/bin
     $BOOTSTRAP_DIR/lib/powerline/scripts
-    ~/git/dev-tools/aw_utils
     /usr/local/heroku/bin
     $ANDROID_HOME/tools
     $ANDROID_HOME/platform-tools
+    /opt/node/latest/bin
 )
 
 for p in $paths; do
