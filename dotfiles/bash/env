@@ -14,6 +14,7 @@ paths=(
     $ANDROID_HOME/tools
     $ANDROID_HOME/platform-tools
     /opt/node/latest/bin
+    /opt/gradle/latest/bin
 )
 
 for p in $paths; do
