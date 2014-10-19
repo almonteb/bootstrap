@@ -1,7 +1,7 @@
 sHost=$(hostname | cut -d. -f1)
 
 case "$sHost" in
-    Phobos|dev-vm)
+    Phobos|droplet|dev-vm)
         promptColor="green" ;;
     *)
         promptColor="" ;;

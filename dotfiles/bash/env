@@ -3,6 +3,11 @@ export HISTCONTROL=ignoredups
 export HISTCONTROL=ignoreboth
 export HISTSIZE=99999
 export HISTFILESIZE=999999
+
+if [[ "$OSTYPE" =~ ^darwin ]]; then
+    PATH=/usr/local/opt/coreutils/libexec/gnubin:$PATH
+fi
+
 export BOOTSTRAP_DIR=$(readlink -f $(dirname $(readlink -f $0))/../../)
 export DOTFILES=$BOOTSTRAP_DIR/dotfiles
 export ANDROID_HOME=/opt/android-sdk-linux
@@ -10,6 +15,7 @@ export ANDROID_HOME=/opt/android-sdk-linux
 paths=(
     ~/bin
     $BOOTSTRAP_DIR/lib/powerline/scripts
+    /usr/local/bin
     /usr/local/heroku/bin
     $ANDROID_HOME/tools
     $ANDROID_HOME/platform-tools
