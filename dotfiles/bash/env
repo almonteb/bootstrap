@@ -16,6 +16,7 @@ paths=(
     ~/bin
     $BOOTSTRAP_DIR/lib/powerline/scripts
     /usr/local/bin
+    /usr/local/go/bin
     /usr/local/heroku/bin
     $ANDROID_HOME/tools
     $ANDROID_HOME/platform-tools
