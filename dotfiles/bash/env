@@ -11,9 +11,11 @@ fi
 export BOOTSTRAP_DIR=$(readlink -f $(dirname $(readlink -f $0))/../../)
 export DOTFILES=$BOOTSTRAP_DIR/dotfiles
 export ANDROID_HOME=/opt/android-sdk-linux
+export GOPATH=~/src/go
 
 paths=(
     ~/bin
+    ~/src/go/bin
     ~/git/dev-tools/bin
     $BOOTSTRAP_DIR/lib/powerline/scripts
     /usr/local/bin
