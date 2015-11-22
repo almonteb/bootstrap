@@ -1,11 +1,6 @@
 set nocompatible              " Don't be compatible with vi
 let mapleader=","             " change the leader to be a comma vs slash
 
-" This string is very important, without 256color at the end, vim won't know
-" to enable 256 colors, without rxvt-unicode, italics and other font goodies
-" wont work
-set term=rxvt-unicode-256color
-
 " ==========================================================
 " Bundle 
 " ==========================================================
