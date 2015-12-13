@@ -12,21 +12,24 @@ awful.rules = require("awful.rules")
 awful.autofocus = require("awful.autofocus")
 
 -- {{{ systray
-function spawn_once(name, command)
-    if (command == nil) then
-        command = name
+function run_once(cmd)
+    findme = cmd
+    firstspace = cmd:find(" ")
+    if firstspace then
+        findme = cmd:sub(0, firstspace-1)
     end
-    os.execute("pgrep " .. name .. " || " .. command .. " &")
+    awful.util.spawn_with_shell("pgrep -u $USER -x "..findme.." > /dev/null || ("..cmd..")")
 end
 
-spawn_once("nm-applet")
-spawn_once("xfce4-power-manager")
-spawn_once("unclutter")
-spawn_once("compton", "compton --config ~/.compton.conf -b")
-spawn_once("wmname", "wmname LG3D")
-spawn_once("numlockx", "numlockx on")
-spawn_once("dropbox", "dropbox start")
-spawn_once("xscreensaver", "xscreensaver -nosplash")
+run_once("nm-applet")
+run_once("xfce4-power-manager")
+run_once("unclutter")
+run_once("compton --config ~/.compton.conf -b")
+run_once("wmname LG3D")
+run_once("numlockx on")
+run_once("dropbox start")
+run_once("xscreensaver -nosplash")
+run_once("volumeicon")
 -- }}}
 
 -- {{{ Error handling
@@ -60,12 +63,11 @@ end
 
 -- {{{ Variable definitions
 awesome_dir = os.getenv("HOME") .. "/.config/awesome"
-terminal = "urxvt256c-ml"
+terminal = "urxvt"
 browser = "google-chrome"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 file_mgr = "nautilus"
-sys_monitor = 'xfce4-taskmanager'
 
 -- Themes define colours, icons, and wallpapers
 icons = awesome_dir .. "/icons"
@@ -160,8 +162,6 @@ mytextclock = awful.widget.textclock("<span background='" .. beautiful.colors.ba
         beautiful.colors.base03 .. "' font='Tamsyn 15'> <span font='Termsyn 8'>ƕ %I:%M %p </span></span>")
 lain.widgets.calendar:attach(mytextclock, { font = "Droid Sans Mono" })
 
-local yawn = lain.widgets.yawn(2490383, { u = "f" })
-
 -- {{{ CPU
 cpuwidget = wibox.widget.textbox()
 cpu_t = awful.tooltip({ objects = { cpuwidget }, })
@@ -184,125 +184,6 @@ vicious.register(memwidget, vicious.widgets.mem,
     "<span background='" .. beautiful.colors.base1 .. "' color='" ..
             beautiful.colors.base03 .. "' font='Tamsyn 15'> <span font='Termsyn 8'>ƞ $1% </span></span>", 3)
 blingbling.popups.htop(memwidget, { title_color = beautiful.colors.blue, user_color = beautiful.colors.green, root_color = beautiful.colors.red, terminal = terminal })
--- }}}
-
--- {{{ Volume
-lower_volume = "amixer -q set Master 2%- unmute"
-raise_volume = "amixer -q set Master 2%+ unmute"
-toggle_volume = "amixer set Master toggle"
-volmixer = terminal .. " -name alsamixer -e alsamixer"
-
---volnoti
-local last_id
-function closeLastNoti()
-    screen = mouse.screen
-    for p, pos in pairs(naughty.notifications[screen]) do
-        for i, n in pairs(naughty.notifications[screen][p]) do
-            if (n.width == 256) then -- to close only previous bright/vol notifications
-                naughty.destroy(n)
-                break
-            end
-        end
-    end
-end
-
-volnotiicon = nil
-function volnoti()
-    last_id = naughty.notify({
-        icon = volnotiicon,
-        position = "top_right",
-        bg = "#00000000",
-        timeout = 1,
-        width = 256,
-        gap = 0,
-        screen = mouse.screen,
-        replaces_id = last_id,
-    }).id
-end
-
-volwidget = wibox.widget.textbox()
-vol_t = awful.tooltip({ objects = { volwidget, volume_master } })
-
-volume_master = blingbling.volume({ height = 18, graph_color = beautiful.colors.base03, graph_background_color = "#00000000", background_color = beautiful.colors.base0, width = 40, show_text = false, text_color = beautiful.colors.base03, background_text_color = "#00000000", bar = false, label = "$percent%" })
-volume_master:update_master()
-volume_master:set_master_control()
-vol_t:add_to_object(volume_master)
-
-vol_n = true
-vicious.register(volwidget, vicious.widgets.volume, function(widget, args)
-    vol_t:set_text(args[1] .. "%")
-    vol_t:add_to_object(volwidget)
-    -- volnoti
-    if (args[1] ~= vol_a) then
-        if (vol_n == false) then
-            if (args[1] == 0 or args[2] == "♩") then
-                volnotiicon = icons .. '/noti/volbar/bar_00.png'
-            elseif (args[1] <= 5 and args[1] > 0) then
-                volnotiicon = icons .. '/noti/volbar/bar_05.png'
-            elseif (args[1] <= 10 and args[1] > 5) then
-                volnotiicon = icons .. '/noti/volbar/bar_10.png'
-            elseif (args[1] <= 15 and args[1] > 10) then
-                volnotiicon = icons .. '/noti/volbar/bar_15.png'
-            elseif (args[1] <= 20 and args[1] > 15) then
-                volnotiicon = icons .. '/noti/volbar/bar_20.png'
-            elseif (args[1] <= 25 and args[1] > 20) then
-                volnotiicon = icons .. '/noti/volbar/bar_25.png'
-            elseif (args[1] <= 30 and args[1] > 25) then
-                volnotiicon = icons .. '/noti/volbar/bar_30.png'
-            elseif (args[1] <= 35 and args[1] > 30) then
-                volnotiicon = icons .. '/noti/volbar/bar_35.png'
-            elseif (args[1] <= 40 and args[1] > 35) then
-                volnotiicon = icons .. '/noti/volbar/bar_40.png'
-            elseif (args[1] <= 45 and args[1] > 40) then
-                volnotiicon = icons .. '/noti/volbar/bar_45.png'
-            elseif (args[1] <= 50 and args[1] > 45) then
-                volnotiicon = icons .. '/noti/volbar/bar_50.png'
-            elseif (args[1] <= 55 and args[1] > 50) then
-                volnotiicon = icons .. '/noti/volbar/bar_55.png'
-            elseif (args[1] <= 60 and args[1] > 55) then
-                volnotiicon = icons .. '/noti/volbar/bar_60.png'
-            elseif (args[1] <= 65 and args[1] > 60) then
-                volnotiicon = icons .. '/noti/volbar/bar_65.png'
-            elseif (args[1] <= 70 and args[1] > 65) then
-                volnotiicon = icons .. '/noti/volbar/bar_70.png'
-            elseif (args[1] <= 75 and args[1] > 70) then
-                volnotiicon = icons .. '/noti/volbar/bar_75.png'
-            elseif (args[1] <= 80 and args[1] > 75) then
-                volnotiicon = icons .. '/noti/volbar/bar_80.png'
-            elseif (args[1] <= 85 and args[1] > 80) then
-                volnotiicon = icons .. '/noti/volbar/bar_85.png'
-            elseif (args[1] <= 90 and args[1] > 85) then
-                volnotiicon = icons .. '/noti/volbar/bar_90.png'
-            elseif (args[1] <= 95 and args[1] > 90) then
-                volnotiicon = icons .. '/noti/volbar/bar_95.png'
-            elseif (args[1] > 95) then
-                volnotiicon = icons .. '/noti/volbar/bar_100.png'
-            end
-            volnoti()
-        end
-        vol_a = args[1]
-        vol_n = false
-    end
-    --local label = { ["♫"] = " ", ["♩"] = "M" }
-    if (args[2] == "♩") then
-        vol_t:set_text("Muted")
-        return "<span background='" .. beautiful.colors.base0 .. "' color='" .. beautiful.colors.base03 .. "' font='Tamsyn 15'> <span font='Termsyn 8'>Ʃ</span></span>"
-    elseif (args[1] == 0) then
-        return "<span background='" .. beautiful.colors.base0 .. "' color='" .. beautiful.colors.base03 .. "' font='Tamsyn 15'> <span font='Termsyn 8'>ƣ</span></span>"
-    elseif (args[1] <= 30 and args[1] > 0) then
-        return "<span background='" .. beautiful.colors.base0 .. "' color='" .. beautiful.colors.base03 .. "' font='Tamsyn 15'> <span font='Termsyn 8'>Ƣ</span></span>"
-    elseif (args[1] <= 60) then
-        return "<span background='" .. beautiful.colors.base0 .. "' color='" .. beautiful.colors.base03 .. "' font='Tamsyn 15'> <span font='Termsyn 8'>ơ</span></span>"
-    elseif (args[1] >= 61) then
-        return "<span background='" .. beautiful.colors.base0 .. "' color='" .. beautiful.colors.base03 .. "' font='Tamsyn 15'> <span font='Termsyn 8'>ƪ</span></span>"
-    end
-end, 3, "Master")
-
-volwidget:buttons(volume_master:buttons(awful.util.table.join(awful.button({}, 1, function() awful.util.spawn(toggle_volume, false) vicious.force({ volwidget }) end),
-    awful.button({}, 2, function() awful.util.spawn(volmixer, false) end),
-    awful.button({}, 4, function() awful.util.spawn(raise_volume, false) vicious.force({ volwidget }) end),
-    awful.button({}, 5, function() awful.util.spawn(lower_volume, false) vicious.force({ volwidget }) end))))
-
 -- }}}
 
 -- {{{ Spacers & Arrows
@@ -447,11 +328,7 @@ for s = 1, screen.count() do
     if s == 1 then
         right_layout:add(arr15)
         right_layout:add(wibox.widget.systray())
-        right_layout:add(yawn.icon)
-        right_layout:add(arr14)
-        right_layout:add(volwidget)
-        right_layout:add(volume_master)
-        right_layout:add(arr7)
+        right_layout:add(arr3)
         right_layout:add(memwidget)
         right_layout:add(arr8)
         right_layout:add(cpuwidget)
@@ -560,10 +437,6 @@ clientkeys = awful.util.table.join(awful.key({ modkey, }, "f", function(c) c.ful
             c.maximized_horizontal = not c.maximized_horizontal
             c.maximized_vertical = not c.maximized_vertical
         end),
-    awful.key({}, "XF86_AudioLowerVolume", function() awful.util.spawn(lower_volume) vicious.force({ volwidget }) end),
-    awful.key({}, "XF86_AudioRaiseVolume", function() awful.util.spawn(raise_volume) vicious.force({ volwidget }) end),
-    awful.key({}, "XF86_AudioMute", function() awful.util.spawn(toggle_volume) end),
-
     awful.key({}, "XF86Calculator", function() awful.util.spawn('gnome-calculator') end),
     awful.key({}, "Print", function() awful.util.spawn("xfce4-screenshooter") end))
 
