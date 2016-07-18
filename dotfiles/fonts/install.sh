@@ -1,4 +1,4 @@
 #!/bin/bash
 mkfontscale &&
 mkfontdir &&
-fc-cache -fv ~/.fonts
+fc-cache

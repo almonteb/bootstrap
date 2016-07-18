@@ -58,6 +58,9 @@ if [[ -s "$HOME/.rvm/scripts/rvm" ]]  ; then
   source "$HOME/.rvm/scripts/rvm" ;
 fi
 
+# DNVM
+[ -s "$HOME/.dnx/dnvm/dnvm.sh" ] && . "$HOME/.dnx/dnvm/dnvm.sh"
+
 # private aliases, if found
 if [ -f $HOME/.private_profile ]; then
   . $HOME/.private_profile
