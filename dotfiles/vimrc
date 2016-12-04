@@ -139,6 +139,10 @@ set smarttab                " Handle tabs more intelligently
 set hlsearch                " Highlight searches by default.
 set incsearch               " Incrementally search while typing a /regex
 
+" clipboard
+set clipboard+=unnamed       " use the clipboards of vim and system
+set go+=a                   " Visual selection automatically copied to the clipboard"
+
 " ==========================================================
 " Key bindings
 " ==========================================================
