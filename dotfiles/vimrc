@@ -2,23 +2,26 @@ set nocompatible              " Don't be compatible with vi
 let mapleader=","             " change the leader to be a comma vs slash
 
 " ==========================================================
-" Bundle 
+" Plugin 
 " ==========================================================
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
-Bundle 'gmarik/vundle'
-Bundle 'majutsushi/tagbar'
-Bundle 'scrooloose/nerdtree'
-Bundle 'jistr/vim-nerdtree-tabs'
-Bundle 'kana/vim-smartinput'
-Bundle 'klen/python-mode'
-Bundle 'tpope/vim-fugitive'
-Bundle 'scrooloose/syntastic'
-Bundle 'thinca/vim-localrc'
+Plugin 'gmarik/vundle'
+Plugin 'majutsushi/tagbar'
+Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
+Plugin 'kana/vim-smartinput'
+Plugin 'klen/python-mode'
+Plugin 'tpope/vim-fugitive'
+Plugin 'scrooloose/syntastic'
+Plugin 'thinca/vim-localrc'
+Plugin 'kien/ctrlp.vim'
+Plugin 'jeetsukumaran/vim-buffergator'
+Plugin 'Valloric/YouCompleteMe'
 
-Bundle 'altercation/vim-colors-solarized'
+Plugin 'altercation/vim-colors-solarized'
 
 autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
@@ -172,7 +175,12 @@ map <leader>p "+p
 " Quit window on <leader>q
 nnoremap <leader>q :q<CR>
 
+nnoremap <leader><space> :nohlsearch<CR>
+
 nmap <F2> :TagbarToggle<CR>
+
+map <leader>r :NERDTreeFind<CR>
+
 
 " Add the virtualenv's site-packages to vim path
 if has('python')
@@ -236,3 +244,8 @@ let g:pymode_syntax_space_errors = g:pymode_syntax_all
 
 " Don't autofold code
 let g:pymode_folding = 0
+
+let g:ctrlp_custom_ignore = {
+  \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
+  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg)$',
+\}
