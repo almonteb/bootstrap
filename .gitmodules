@@ -22,3 +22,6 @@
 [submodule "dotfiles/config/awesome/lain"]
 	path = dotfiles/config/awesome/lain
 	url = https://github.com/copycat-killer/lain.git
+[submodule "dotfiles/tmux/plugins/tpm"]
+	path = dotfiles/tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm
