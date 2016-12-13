@@ -26,6 +26,7 @@ Plugin 'altercation/vim-colors-solarized'
 autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 map <C-n> :NERDTreeTabsToggle<CR>
+let NERDTreeIgnore = ['\.pyc$']
 
 " ==========================================================
 " Powerline
@@ -176,6 +177,8 @@ map <leader>p "+p
 nnoremap <leader>q :q<CR>
 
 nnoremap <leader><space> :nohlsearch<CR>
+map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>z :BuffergatorToggle<CR>
 
 nmap <F2> :TagbarToggle<CR>
 
