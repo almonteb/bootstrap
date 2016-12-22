@@ -25,3 +25,6 @@
 [submodule "dotfiles/tmux/plugins/tpm"]
 	path = dotfiles/tmux/plugins/tpm
 	url = https://github.com/tmux-plugins/tpm
+[submodule "dotfiles/config/nvim/bundle/repos/github.com/Shougo/dein.vim"]
+	path = dotfiles/config/nvim/bundle/repos/github.com/Shougo/dein.vim
+	url = https://github.com/Shougo/dein.vim
