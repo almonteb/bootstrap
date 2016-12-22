@@ -11,7 +11,6 @@ call vundle#rc()
 Plugin 'gmarik/vundle'
 Plugin 'majutsushi/tagbar'
 Plugin 'scrooloose/nerdtree'
-Plugin 'jistr/vim-nerdtree-tabs'
 Plugin 'kana/vim-smartinput'
 Plugin 'klen/python-mode'
 Plugin 'tpope/vim-fugitive'
@@ -20,12 +19,14 @@ Plugin 'thinca/vim-localrc'
 Plugin 'kien/ctrlp.vim'
 Plugin 'jeetsukumaran/vim-buffergator'
 Plugin 'Valloric/YouCompleteMe'
+Plugin 'fatih/vim-go'
+Plugin 'nsf/gocode'
 
-Plugin 'altercation/vim-colors-solarized'
+Plugin 'sjl/badwolf'
 
 autocmd vimenter * if !argc() | NERDTree | endif
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
-map <C-n> :NERDTreeTabsToggle<CR>
+map <C-n> :NERDTreeToggle<CR>
 let NERDTreeIgnore = ['\.pyc$']
 
 " ==========================================================
@@ -47,10 +48,8 @@ endif
 " ==========================================================
 " Basic Settings
 " ==========================================================
-let g:solarized_termcolors=256
-let g:solarized_termtrans=1
 syntax on                     " syntax highlighing
-colorscheme solarized         " color scheme
+colorscheme badwolf           " color scheme
 filetype on                   " try to detect filetypes
 filetype plugin indent on     " enable loading indent file for filetype
 set number                    " Display line numbers
@@ -102,6 +101,7 @@ set foldlevel=99            " don't fold by default
 set wildchar=<TAB>          " the completion key for the commandline
 set wildmenu                " crazy menu tab completion
 set mouse=a                 " mouse integration
+set ttymouse=xterm2
 
 " don't outdent hashes
 inoremap # #
@@ -173,16 +173,17 @@ imap <C-W> <C-O><C-W>
 " Paste from clipboard
 map <leader>p "+p
 
-" Quit window on <leader>q
 nnoremap <leader>q :q<CR>
 
 nnoremap <leader><space> :nohlsearch<CR>
 map <leader>g :YcmCompleter GoToDefinitionElseDeclaration<CR>
+map <leader>f :YcmCompleter GoToReferences<CR>
+nnoremap <Leader>d :YcmCompleter GetDoc<CR>
 nnoremap <leader>z :BuffergatorToggle<CR>
 
 nmap <F2> :TagbarToggle<CR>
 
-map <leader>r :NERDTreeFind<CR>
+map <leader>G :NERDTreeFind<CR>
 
 
 " Add the virtualenv's site-packages to vim path
@@ -197,6 +198,10 @@ if 'VIRTUAL_ENV' in os.environ:
     activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
     execfile(activate_this, dict(__file__=activate_this))
 EOF
+endif
+
+if filereadable('bin/python')
+    let g:ycm_python_binary_path = 'bin/python'
 endif
 
 " Load up virtualenv's vimrc if it exists
@@ -220,7 +225,7 @@ endif
 " ]]            Jump on next class or function (normal, visual, operator modes)
 " [M            Jump on previous class or method (normal, visual, operator modes)
 " ]M            Jump on next class or method (normal, visual, operator modes)
-let g:pymode_rope = 1
+let g:pymode_rope = 0
 
 " Documentation
 let g:pymode_doc = 1
