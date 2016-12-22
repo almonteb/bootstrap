@@ -1,6 +1,7 @@
-autoload -U colors && colors
-autoload compinit && compinit
+autoload -Uz colors && colors
+autoload -Uz compinit compdef && compinit
 autoload -Uz promptinit && promptinit
+autoload -Uz bashcompinit && bashcompinit
 
 bindkey '^[^[[D' backward-word
 bindkey '^[^[[C' forward-word
