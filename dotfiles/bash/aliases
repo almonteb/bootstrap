@@ -39,6 +39,8 @@ alias less='less -R'
 alias tu='top -o cpu'
 alias tm='top -o vsize'
 
+alias killbg='kill %${(k)^jobdirs}'
+
 alias sudo='sudo -E'
 function tophist() {
     cat $HISTFILE | awk '{print $2}' | awk 'BEGIN {RS=";"}{print $1}' | sort | uniq -c | sort -nr | head
