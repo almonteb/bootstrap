@@ -26,9 +26,16 @@ call dein#add('sjl/gundo.vim', {'on_cmd': 'GundoToggle'})
 
 " lazy load syntax completions on insert mode
 call dein#add('Shougo/deoplete.nvim')
+call dein#add('zchee/deoplete-go', {'build': 'make'})
+call dein#add('zchee/deoplete-clang')
 call dein#add('zchee/deoplete-jedi')
 call deoplete#enable()
 let g:deoplete#sources#jedi#show_docstring = 1
+
+let g:deoplete#sources#go#gocode_binary = '$GOPATH/bin/gocode'
+let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
+let g:deoplete#sources#go#use_cache = 0
+let g:deoplete#sources#go#json_directory = '~/.cache/deoplete/go/$GOOS_$GOARCH'
 
 call dein#add('davidhalter/jedi-vim')
 let g:jedi#completions_enabled = 0
@@ -127,6 +134,10 @@ map <F3> :GundoToggle<CR>
 " misc leader key mappings
 nnoremap <leader>q :bd<CR>
 
+" neocomplete like
+set completeopt+=noinsert
+" deoplete.nvim recommend
+set completeopt+=noselect
 
 " Toggle linenumbers
 function! NumberToggle()
