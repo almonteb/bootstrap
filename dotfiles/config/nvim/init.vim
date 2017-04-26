@@ -89,7 +89,6 @@ call dein#add('tpope/vim-repeat')
 call dein#add('vim-syntastic/syntastic')
 
 " snippets
-call dein#add('Shougo/neocomplete')
 call dein#add('Shougo/neosnippet')
 call dein#add('Shougo/neosnippet-snippets')
 
