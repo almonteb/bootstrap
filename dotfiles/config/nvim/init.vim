@@ -88,6 +88,16 @@ call dein#add('tpope/vim-repeat')
 
 call dein#add('vim-syntastic/syntastic')
 
+" snippets
+call dein#add('Shougo/neocomplete')
+call dein#add('Shougo/neosnippet')
+call dein#add('Shougo/neosnippet-snippets')
+
+let g:neocomplete#enable_at_startup = 1
+imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+xmap <C-k>     <Plug>(neosnippet_expand_target)
+
 call dein#end()
 
 " Required:
