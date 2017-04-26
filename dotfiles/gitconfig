@@ -7,6 +7,7 @@
     co = checkout
     st = status
     di = diff
+    dt = difftool
     co = checkout
     ci = commit
     br = branch
@@ -29,12 +30,18 @@
     default = matching
 [core]
     excludesfile = ~/.gitignore_global
-    editor = vim
+    editor = nvim
 [http]
-	sslVerify = false
+    sslVerify = true
 [diff]
-	tool = vimdiff
+    tool = icdiff
+[difftool]
+    prompt = false
+[difftool "icdiff"]
+    cmd = /usr/local/bin/icdiff --line-numbers $LOCAL $REMOTE
 [merge]
-	tool = vimdiff
+    tool = vimdiff
 [pull]
-	rebase = true
+    rebase = true
+[rebase]
+    autoStash = true
