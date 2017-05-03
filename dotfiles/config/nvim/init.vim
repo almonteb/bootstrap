@@ -111,6 +111,7 @@ endif
 "End dein Scripts-------------------------
 
 set termguicolors
+set mouse=a
 
 " remember cursor position next time we open the file
 if has("autocmd")
