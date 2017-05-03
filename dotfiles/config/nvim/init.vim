@@ -117,6 +117,11 @@ if has("autocmd")
 	au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 endif
 
+" shows results of a command as you type
+if exists('&inccommand')
+  set inccommand=split
+endif
+
 " show a little context while scrolling
 set scrolloff=5
 
