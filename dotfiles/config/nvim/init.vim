@@ -73,11 +73,12 @@ let g:airline#extensions#tabline#buffer_min_count = 2
 call dein#add('tpope/vim-fugitive')
 
 " fuzzy file search
-call dein#add('kien/ctrlp.vim')
+call dein#add('ctrlpvim/ctrlp.vim')
 let g:ctrlp_custom_ignore = {
   \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
   \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg|pyc)$',
 \}
+map <C-t> :CtrlPBufTag<CR>
 
 " comment/uncomment via ,#
 call dein#add('scrooloose/nerdcommenter')
