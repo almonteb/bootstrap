@@ -87,7 +87,12 @@ call dein#add('scrooloose/nerdcommenter')
 call dein#add('tpope/vim-surround')
 call dein#add('tpope/vim-repeat')
 
-call dein#add('vim-syntastic/syntastic')
+" syntax
+call dein#add('neomake/neomake')
+autocmd! BufWritePost * Neomake
+let g:neomake_python_enabled_makers = ['flake8']
+let g:neomake_python_flake8_args='--max-line-length=119'
+
 
 " snippets
 call dein#add('Shougo/neosnippet')
@@ -148,7 +153,8 @@ map <F2> :TagbarToggle<CR>
 map <F3> :GundoToggle<CR>
 
 " misc leader key mappings
-nnoremap <leader>q :bd<CR>
+nnoremap <leader>Q :bd<CR>
+nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " neocomplete like
 set completeopt+=noinsert
