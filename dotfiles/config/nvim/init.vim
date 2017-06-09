@@ -15,6 +15,7 @@ nnoremap <leader>z :BuffergatorToggle<CR>
 " colorscheme
 call dein#add('sjl/badwolf')
 colorscheme badwolf
+set termguicolors
 
 " lazy load nerdtree on first use
 call dein#add('scrooloose/nerdtree', {'on_cmd': 'NERDTreeToggle'})
