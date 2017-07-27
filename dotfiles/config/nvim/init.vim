@@ -28,6 +28,7 @@ call dein#add('sjl/gundo.vim', {'on_cmd': 'GundoToggle'})
 " lazy load syntax completions on insert mode
 call dein#add('Shougo/deoplete.nvim')
 call dein#add('zchee/deoplete-go', {'build': 'make'})
+call dein#add('fatih/vim-go')
 call dein#add('zchee/deoplete-clang')
 call dein#add('zchee/deoplete-jedi')
 call deoplete#enable()
@@ -63,12 +64,14 @@ call dein#add('majutsushi/tagbar')
 
 " airline config
 call dein#add('vim-airline/vim-airline')
+call dein#add('vim-airline/vim-airline-themes')
 let g:airline_powerline_fonts = 1
 let g:airline_detect_modified=1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_min_count = 2
+let g:airline_theme='base16_spacemacs'
 
 " VCS (cuz airline doesn't do this by itself like powerline did)
 call dein#add('tpope/vim-fugitive')
