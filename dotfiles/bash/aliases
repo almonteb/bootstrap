@@ -88,3 +88,17 @@ function scratch {
 function virtualenv_info {
     [ $VIRTUAL_ENV ] && echo '('`basename $VIRTUAL_ENV`')'
 }
+
+brew-cask-upgrade() {
+  (set -x; brew update;)
+  (set -x; brew cleanup;)
+  (set -x; brew cask cleanup;)
+  while read pkg_ver; do
+    pkg=$(echo ${pkg_ver} | cut -d' ' -f1)
+    brew cask info ${pkg} | head -n1 | tr -d ':' | grep -vqF "${pkg_ver}" \
+      && (set -x; brew cask uninstall ${pkg} --force) \
+      && (set -x; brew cask install ${pkg} --force)
+  done < <(brew cask list --versions)
+  (set -x; brew cleanup;)
+  (set -x; brew cask cleanup;)
+}
