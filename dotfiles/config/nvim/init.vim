@@ -13,9 +13,11 @@ call dein#add('jeetsukumaran/vim-buffergator')
 nnoremap <leader>z :BuffergatorToggle<CR>
 
 " colorscheme
-call dein#add('sjl/badwolf')
-colorscheme badwolf
+call dein#add('mhartington/oceanic-next')
+let g:oceanic_next_terminal_bold = 1
+let g:oceanic_next_terminal_italic = 1
 set termguicolors
+colorscheme OceanicNext
 
 " lazy load nerdtree on first use
 call dein#add('scrooloose/nerdtree', {'on_cmd': 'NERDTreeToggle'})
@@ -64,14 +66,13 @@ call dein#add('majutsushi/tagbar')
 
 " airline config
 call dein#add('vim-airline/vim-airline')
-call dein#add('vim-airline/vim-airline-themes')
 let g:airline_powerline_fonts = 1
 let g:airline_detect_modified=1
 let g:airline#extensions#branch#enabled = 1
 let g:airline#extensions#tagbar#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#buffer_min_count = 2
-let g:airline_theme='base16_spacemacs'
+let g:airline_theme='oceanicnext'
 
 " VCS (cuz airline doesn't do this by itself like powerline did)
 call dein#add('tpope/vim-fugitive')
@@ -120,7 +121,6 @@ endif
 
 "End dein Scripts-------------------------
 
-set termguicolors
 set mouse=a
 
 " remember cursor position next time we open the file
