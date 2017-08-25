@@ -18,6 +18,7 @@ let g:oceanic_next_terminal_bold = 1
 let g:oceanic_next_terminal_italic = 1
 set termguicolors
 colorscheme OceanicNext
+set background=dark
 
 " lazy load nerdtree on first use
 call dein#add('scrooloose/nerdtree', {'on_cmd': 'NERDTreeToggle'})
@@ -107,6 +108,9 @@ let g:neocomplete#enable_at_startup = 1
 imap <C-k>     <Plug>(neosnippet_expand_or_jump)
 smap <C-k>     <Plug>(neosnippet_expand_or_jump)
 xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" navigation
+call dein#add('wesQ3/vim-windowswap')
 
 call dein#end()
 
