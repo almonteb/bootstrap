@@ -34,7 +34,7 @@ prompt_brendan_precmd () {
     path_prompt="%B%F{$prompt_brendan_color2}%(4~|...|)%3~%F{white}"
   else
     space_left=$(( $COLUMNS - $#base_prompt_expanded_no_color - 2 ))
-    path_prompt="%B%F{$prompt_brendan_color2}%${space_left}<...<%~$prompt_newline$(virtualenv_info)%B%F{$prompt_brendan_color3}$(~/bin/vcprompt --format '[%s:%b%m]')%F{white}"
+    path_prompt="%B%F{$prompt_brendan_color2}%${space_left}<...<%~$prompt_newline$(virtualenv_info)%B%F{$prompt_brendan_color3}$(vcprompt -f '[%n:%b%m]')%F{white}"
   fi
   PS1="$base_prompt$path_prompt %# $post_prompt"
   PS2="$base_prompt$path_prompt %_> $post_prompt"
