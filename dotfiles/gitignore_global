@@ -3,3 +3,5 @@
 .ropeproject
 .coverage*
 .tmp
+.DS_Store
+pip-selfcheck.json
