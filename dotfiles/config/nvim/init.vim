@@ -78,13 +78,13 @@ let g:airline_theme='oceanicnext'
 " VCS (cuz airline doesn't do this by itself like powerline did)
 call dein#add('tpope/vim-fugitive')
 
-" fuzzy file search
-call dein#add('ctrlpvim/ctrlp.vim')
-let g:ctrlp_custom_ignore = {
-  \ 'dir':  '\v[\/](\.(git|hg|svn)|\_site)$',
-  \ 'file': '\v\.(exe|so|dll|class|png|jpg|jpeg|pyc)$',
-\}
-map <C-t> :CtrlPBufTag<CR>
+" file search
+let $FZF_DEFAULT_COMMAND = 'ag -l -g ""'
+call dein#add('junegunn/fzf', { 'build': './install -all', 'merged': 0 })
+call dein#add('junegunn/fzf.vim')
+map <C-t> :BTags<CR>
+map <C-p> :Files<CR>
+map <C-f> :Ag<CR>
 
 " comment/uncomment via ,#
 call dein#add('scrooloose/nerdcommenter')
