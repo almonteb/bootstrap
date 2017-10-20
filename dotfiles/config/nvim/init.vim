@@ -12,6 +12,10 @@ call dein#add('Shougo/dein.vim')
 call dein#add('jeetsukumaran/vim-buffergator')
 nnoremap <leader>z :BuffergatorToggle<CR>
 
+" buffer management
+call dein#add('qpkorr/vim-bufkill')
+nnoremap <leader>Q :BD<CR>
+
 " colorscheme
 call dein#add('mhartington/oceanic-next')
 let g:oceanic_next_terminal_bold = 1
@@ -159,10 +163,6 @@ map <F1> <Nop>
 map <F1> :NERDTreeToggle<CR>
 map <F2> :TagbarToggle<CR>
 map <F3> :GundoToggle<CR>
-
-" misc leader key mappings
-nnoremap <leader>Q :bd<CR>
-nnoremap <leader>q :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " neocomplete like
 set completeopt+=noinsert
