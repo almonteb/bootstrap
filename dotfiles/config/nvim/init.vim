@@ -33,6 +33,7 @@ map <leader>G :NERDTreeFind<CR>
 call dein#add('sjl/gundo.vim', {'on_cmd': 'GundoToggle'})
 
 " lazy load syntax completions on insert mode
+call dein#add('sheerun/vim-polyglot')
 call dein#add('Shougo/deoplete.nvim')
 call dein#add('zchee/deoplete-go', {'build': 'make'})
 call dein#add('fatih/vim-go')
