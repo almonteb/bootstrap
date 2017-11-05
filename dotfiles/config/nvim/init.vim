@@ -42,11 +42,6 @@ call dein#add('zchee/deoplete-jedi')
 call deoplete#enable()
 let g:deoplete#sources#jedi#show_docstring = 1
 
-let g:deoplete#sources#go#gocode_binary = '$GOPATH/bin/gocode'
-let g:deoplete#sources#go#sort_class = ['package', 'func', 'type', 'var', 'const']
-let g:deoplete#sources#go#use_cache = 0
-let g:deoplete#sources#go#json_directory = '~/.cache/deoplete/go/$GOOS_$GOARCH'
-
 call dein#add('davidhalter/jedi-vim')
 let g:jedi#completions_enabled = 0
 
