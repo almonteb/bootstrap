@@ -16,14 +16,6 @@ nnoremap <leader>z :BuffergatorToggle<CR>
 call dein#add('qpkorr/vim-bufkill')
 nnoremap <leader>Q :BD<CR>
 
-" colorscheme
-call dein#add('mhartington/oceanic-next')
-let g:oceanic_next_terminal_bold = 1
-let g:oceanic_next_terminal_italic = 1
-set termguicolors
-colorscheme OceanicNext
-set background=dark
-
 " lazy load nerdtree on first use
 call dein#add('scrooloose/nerdtree', {'on_cmd': 'NERDTreeToggle'})
 let NERDTreeIgnore = ['\.pyc$']
@@ -86,6 +78,10 @@ map <C-t> :BTags<CR>
 map <C-p> :Files<CR>
 map <C-f> :Ag<CR>
 
+" notes
+call dein#add('Alok/notational-fzf-vim')
+let g:nv_search_paths = ['~/Dropbox/Notes']
+
 " comment/uncomment via ,#
 call dein#add('scrooloose/nerdcommenter')
 
@@ -99,7 +95,6 @@ autocmd! BufWritePost * Neomake
 let g:neomake_python_enabled_makers = ['flake8']
 let g:neomake_python_flake8_args='--max-line-length=119'
 
-
 " snippets
 call dein#add('Shougo/neosnippet')
 call dein#add('Shougo/neosnippet-snippets')
@@ -111,6 +106,16 @@ xmap <C-k>     <Plug>(neosnippet_expand_target)
 
 " navigation
 call dein#add('wesQ3/vim-windowswap')
+
+" colorscheme
+call dein#add('mhartington/oceanic-next')
+let g:oceanic_next_terminal_bold = 1
+let g:oceanic_next_terminal_italic = 1
+set termguicolors
+colorscheme OceanicNext
+hi Normal guibg=NONE ctermbg=NONE
+set bg=dark
+set background=dark
 
 call dein#end()
 
